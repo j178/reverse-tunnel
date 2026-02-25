@@ -52,10 +52,8 @@
 
 ```text
 cmd/
-  server/
-    main.go
-  client/
-    main.go
+  reverse-tunnel/
+    main.go          # 单一 binary，通过 subcommand 启动 client/server
 internal/
   server/
     listener_a.go      # A 端口接入
@@ -75,7 +73,7 @@ internal/
 ```
 
 ### 模块职责
-- `cmd/*`：参数解析与进程启动。
+- `cmd/reverse-tunnel`：参数解析与进程启动（`server` / `client` 子命令）。
 - `internal/server`：监听、连接管理、配对与调度。
 - `internal/client`：控制面处理、数据面回连、连接本地目标。
 - `internal/protocol`：最小协议定义（消息、握手）。
@@ -179,13 +177,19 @@ internal/
 ## 10) 运行参数建议（示例）
 
 ### server
+- 子命令：`server`
 - `--listen-a :18080`
 - `--listen-b :19090`
 - `--pair-timeout 10s`
 
 ### client
+- 子命令：`client`
 - `--server 127.0.0.1:19090`
 - `--target 127.0.0.1:8080`
+
+### 启动示例
+- `go run ./cmd/reverse-tunnel server --listen-a :18080 --listen-b :19090 --pair-timeout 10s`
+- `go run ./cmd/reverse-tunnel client --server 127.0.0.1:19090 --target 127.0.0.1:8080`
 
 ## 11) 完成标准（Definition of Done）
 

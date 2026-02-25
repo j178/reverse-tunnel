@@ -27,7 +27,7 @@ TARGET_PID=$!
 
 sleep 0.5
 
-go run ./cmd/server \
+go run ./cmd/reverse-tunnel server \
   --listen-a ":${PUBLIC_PORT}" \
   --listen-b ":${CLIENT_PORT}" \
   --pair-timeout "${PAIR_TIMEOUT}" >"${SERVER_LOG}" 2>&1 &
@@ -35,7 +35,7 @@ SERVER_PID=$!
 
 sleep 0.5
 
-go run ./cmd/client \
+go run ./cmd/reverse-tunnel client \
   --server "127.0.0.1:${CLIENT_PORT}" \
   --target "127.0.0.1:${TARGET_PORT}" >"${CLIENT_LOG}" 2>&1 &
 CLIENT_PID=$!

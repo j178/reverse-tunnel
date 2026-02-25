@@ -10,8 +10,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"tmp-proxy/internal/protocol"
-	"tmp-proxy/internal/transport"
+	"github.com/j178/reverse-tunnel/internal/protocol"
+	"github.com/j178/reverse-tunnel/internal/transport"
 )
 
 type Config struct {

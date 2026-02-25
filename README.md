@@ -15,13 +15,13 @@
 1) 启动 server
 
 ```bash
-go run ./cmd/server --listen-a :18080 --listen-b :19090 --pair-timeout 10s
+go run ./cmd/reverse-tunnel server --listen-a :18080 --listen-b :19090 --pair-timeout 10s
 ```
 
 2) 启动 client
 
 ```bash
-go run ./cmd/client --server 127.0.0.1:19090 --target 127.0.0.1:8080
+go run ./cmd/reverse-tunnel client --server 127.0.0.1:19090 --target 127.0.0.1:8080
 ```
 
 3) 访问 A 端口（示例）
